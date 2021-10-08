@@ -29,6 +29,7 @@ In this task, we need to login into the admin page without knowing any employeeâ
 login to the SQL injection webpage.
 ![1](./lab3-screenshots/1.png)
 Figure 1 
+
 After having logged into the SQL Injection webpage, we can see the details as shown in Figure 2.
 ![2](./lab3-screenshots/2.png)
 Figure 2 
