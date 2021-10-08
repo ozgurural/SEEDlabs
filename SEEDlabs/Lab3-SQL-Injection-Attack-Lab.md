@@ -48,3 +48,8 @@ However it did not succeed and returned the page shown below:
 Figure 3 
 
 Because the protection mechanism of MySql database does not allow multiple statements to be executed, so the injection fails.
+
+
+
+## 3.2 Task 2: SQL Injection Attack on UPDATE Statements
+### Task 2.1: Modify your own salary
