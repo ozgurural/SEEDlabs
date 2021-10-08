@@ -43,6 +43,30 @@ I tried the following SQL query to update the statement:
 
 alice'; UPDATE credential SET Nickname='OzgurUral' WHERE name='alice' ;#
 
-However it did not succeed and returned the following page shown below:
+However it did not succeed and returned the page shown below:
 ![3](./lab3-screenshots/3.png)
 Figure 3 
+
+Because the protection mechanism of MySql database does not allow multiple statements to be executed, so the injection fails.
+
+
+
+## 3.2 Task 2: SQL Injection Attack on UPDATE Statements
+### Task 2.1: Modify your own salary
+Firstly, I entered the system as Alice with the command below.
+![4](./lab3-screenshots/4.png)
+Figure 4
+
+Then, I modify Alice's salary with the command below:
+![5](./lab3-screenshots/5.png)
+Figure 5
+
+And as you can see in Figure 6, Alice's salary is increased.
+![6](./lab3-screenshots/6.png)
+Figure 6
+
+Also, af as you can see in Figure 7, Boby's salary is set as 1 dollar. This time we firstly entered the System as Boby and change the salary with the same method explained previously.
+![7](./lab3-screenshots/6.png)
+Figure 7
+
+### Task 2.1: Modify other people’s password.
