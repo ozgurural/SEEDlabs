@@ -33,3 +33,5 @@ Figure 1
 After having logged into the SQL Injection webpage, we can see the details as shown in Figure 2.
 ![2](./lab3-screenshots/2.png)
 Figure 2 
+
+### Task 1.2: Append a new SQL statement. 
