@@ -9,7 +9,7 @@ SQL injection is a code injection technique that exploits the vulnerabilities in
 
 ##  2 Lab Environment
 
-# 2.1 Environment Configuration
+## 2.1 Environment Configuration
 We have developed a web application for this lab. The folder where the application is installed and the URL to access this web application are described in the following:
 •URL:http://www.SEEDLabSQLInjection.com
 •Folder: /var/www/SQLInjection/
@@ -24,3 +24,9 @@ If your web server and browser are running on two different machines, you need t
 We have created a web application, and host it at www.SEEDLabSQLInjection.com. This web application is a simple employee management application. Employees can view and update their personal information in the database through this web application. There are mainly two roles in this web application: Administrator is a privilege role and can manage each individual employees’ profile information; Employee is a normal role and can view or update his/her own profile information. All employee information is described in the following table.
 
 ## 3.1 Task 1: SQL Injection Attack on SELECT Statements
+### Task 1.1: SQL Injection Attack from webpage. 
+In this task, we need to login into the admin page without knowing any employee’s credential. Figure 1 shows
+login to the SQL injection webpage.
+![1](./lab3-screenshots/1.png)
+
+After having logged into the SQL Injection webpage, we can see the details as shown in Figure 6.
