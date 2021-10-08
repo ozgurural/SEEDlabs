@@ -79,3 +79,12 @@ PasswordOzgurural[10/08/21]seed@VM:~$
 2303012284ca4c22d18b3ac808bfcec68598a020  password.txt
 [10/08/21]seed@VM:~$ 
 ```
+Then I enter:
+
+‘, Password=’2303012284ca4c22d18b3ac808bfcec68598a020′ WHERE Name=’Boby’;#
+
+Into the NickName field on Alice’s Edit Profile page.
+After I submit it, I log out of Alice’s account and try to log into Boby’s account with the new password (PasswordOzgurural):
+![8](./lab3-screenshots/8.png)
+Figure 8
+
