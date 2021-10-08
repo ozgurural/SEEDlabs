@@ -66,7 +66,7 @@ And as you can see in Figure 6, Alice's salary is increased.
 Figure 6
 
 Also, af as you can see in Figure 7, Boby's salary is set as 1 dollar. This time we firstly entered the System as Boby and change the salary with the same method explained previously.
-![7](./lab3-screenshots/6.png)
+![7](./lab3-screenshots/7.png)
 Figure 7
 
 ### Task 2.1: Modify other people’s password.
