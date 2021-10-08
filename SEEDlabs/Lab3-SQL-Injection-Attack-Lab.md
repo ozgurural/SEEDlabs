@@ -43,6 +43,6 @@ I tried the following SQL query to update the statement:
 
 alice'; UPDATE credential SET Nickname='OzgurUral' WHERE name='alice' ;#
 
-However it did not succeed and returned the following page shown below:
+However it did not succeed and returned the page shown below:
 ![3](./lab3-screenshots/3.png)
 Figure 3 
