@@ -28,5 +28,7 @@ We have created a web application, and host it at www.SEEDLabSQLInjection.com. T
 In this task, we need to login into the admin page without knowing any employee’s credential. Figure 1 shows
 login to the SQL injection webpage.
 ![1](./lab3-screenshots/1.png)
-
-After having logged into the SQL Injection webpage, we can see the details as shown in Figure 6.
+Figure 1 
+After having logged into the SQL Injection webpage, we can see the details as shown in Figure 2.
+![2](./lab3-screenshots/2.png)
+Figure 2 
