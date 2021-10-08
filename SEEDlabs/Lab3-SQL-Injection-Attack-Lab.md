@@ -93,9 +93,11 @@ Figure 8
 In this task, firstly I fix the unstafe_home.php, as you can see in Figure 9. Then I fix unsafe_edit_backend.php, as can be seen in Figure 10.
 
 ![9](./lab3-screenshots/9.png)
+
 Figure 9
 
 ![10](./lab3-screenshots/10.png)
+
 Figure 10
 
 After these fixes, I tried performing one of the SQL injection attacks. I will try to change Alice’s salary from her Edit Profile page. As expected; it was not succeeded.
