@@ -50,7 +50,6 @@ Figure 3
 Because the protection mechanism of MySql database does not allow multiple statements to be executed, so the injection fails.
 
 
-
 ## 3.2 Task 2: SQL Injection Attack on UPDATE Statements
 ### Task 2.1: Modify your own salary
 Firstly, I entered the system as Alice with the command below.
@@ -87,4 +86,19 @@ Into the NickName field on Alice’s Edit Profile page.
 After I submit it, I log out of Alice’s account and try to log into Boby’s account with the new password (PasswordOzgurural):
 ![8](./lab3-screenshots/8.png)
 Figure 8
+
+## 3.3 Task 3: Countermeasure — Prepared Statement
+
+
+In this task, firstly I fix the unstafe_home.php, as you can see in Figure 9. Then I fix unsafe_edit_backend.php, as can be seen in Figure 10.
+
+![9](./lab3-screenshots/9.png)
+Figure 9
+
+![10](./lab3-screenshots/10.png)
+Figure 10
+
+After these fixes, I tried performing one of the SQL injection attacks. I will try to change Alice’s salary from her Edit Profile page. As expected; it was not succeeded.
+
+
 
