@@ -34,6 +34,23 @@ The  above  CGI  program  in  the  /usr/lib/cgi-bin  directory  and  is  executa
 ```sh
 curl http://localhost/cgi-bin/myprog.cgi
 ```
+I did the required steps as you can see below:
+
+```sh
+[10/13/21]seed@VM:.../cgi-bin$ vim myprog.cgi
+[10/13/21]seed@VM:.../cgi-bin$ sudo su
+root@VM:/usr/lib/cgi-bin# vim myprog.cgi
+root@VM:/usr/lib/cgi-bin# ll
+total 12
+drwxr-xr-x   2 root root 4096 Oct 13 16:52 ./
+drwxr-xr-x 153 root root 4096 Jun 11  2019 ../
+-rw-r--r--   1 root root   87 Oct 13 16:52 myprog.cgi
+root@VM:/usr/lib/cgi-bin# chmod +x myprog.cgi 
+root@VM:/usr/lib/cgi-bin# curl http://localhost/cgi-bin/myprog.cgi
+
+Hello, I am Shellshock!!
+root@VM:/usr/lib/cgi-bin#
+```
 
 
 In our setup, we run the Web server and the attack from the same computer, and that is why we use localhost. In real attacks, the server is running on a remote machine, and instead of using localhost, we use the hostname or the IP address of the server.
