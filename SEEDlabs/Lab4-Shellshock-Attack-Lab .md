@@ -34,3 +34,12 @@ The  above  CGI  program  in  the  /usr/lib/cgi-bin  directory  and  is  executa
 ```sh
 curl http://localhost/cgi-bin/myprog.cgi
 ```
+
+
+In our setup, we run the Web server and the attack from the same computer, and that is why we use localhost. In real attacks, the server is running on a remote machine, and instead of using localhost, we use the hostname or the IP address of the server.
+
+### Task  1A:  
+Get  Secret  Data.  After  the  above  CGI  program  is  set  up,  you  can  launch  the Shellshock attack. The attack does not depend on what is in the CGI program, as it targets the Bash program, which is invoked first, before the CGI script is executed. Your goal is to launch the  attack  through  the  URL  http://localhost/cgi-bin/myprog.cgi,  such  that  you  can  achieve something that you cannot do as a remote user. In this task, you need to create an account.db file in directory /usr/lib/cgi-bin using the root account with some random content, e.g.,“ABCDE”. As  a  regular  user  without  the  permission  of  accessing  cgi-bin  folder,  you  now  need  to  get  the content  of  account.db  via  the  Shellshock  attack.  Please  describe  how  your  attack  works.  Note that, your screenshot of successful attack is required for this task.
+
+### Task 1B: 
+Crash the Server. In this task, we want to crash the server with the Shellshock attack. This kind of attack typically happens for a deny of service. In this task, the /bin/sleep function is your best friend to use in your attack. If you are not familiar with the sleep function, you can use sleep –help for more information. Please describe how your attack works.
