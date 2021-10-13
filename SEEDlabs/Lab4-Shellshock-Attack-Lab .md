@@ -29,3 +29,8 @@ echo
 echo
 echo "Hello, I am Shellshock!!"
 ```
+The  above  CGI  program  in  the  /usr/lib/cgi-bin  directory  and  is  executable.  This  folder  is  the default  CGI  directory  for  the  Apache  web  server.  To  access  this  CGI  program  from  the  Web, you can either use a browser by typing the following URL: http://localhost/cgi-bin/myprog.cgi, or use the following command line program curl to do the same thing:
+
+```sh
+curl http://localhost/cgi-bin/myprog.cgi
+```
