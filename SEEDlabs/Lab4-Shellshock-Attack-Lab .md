@@ -16,3 +16,16 @@ The Bash program in Ubuntu 16.04 has already been patched, so it is no longer vu
 ```sh
 $ /bin/bash_shellshock
 ```
+
+##  2.2    Task 1: Attack CGI programs
+In  this  task,  we  will  launch  the  Shellshock  attack  on  a  remote  web  server.  Many  web  servers enable CGI, which is a standard method used to generate dynamic content on Web pages and Web  applications.  Many  CGI  programs  are  written  using  shell  script.  Therefore,  before  a  CGI program is executed, the shell program will be invoked first, and such an invocation is triggered by a user from a remote computer.
+
+Set up the CGI Program. Create a very simple CGI program (called myprog.cgi) using the root account  in  folder  /usr/lib/cgi-bin/  as  the  following.  Make  this  cgi  executable  by  running  ”chmod 755 myprog.cgi”. It simply prints out "Hello, I am Shellshock!!" using shell script.
+
+```sh
+#!/bin/bash
+echo "Content-type: text/plain"
+echo
+echo
+echo "Hello, I am Shellshock!!"
+```
