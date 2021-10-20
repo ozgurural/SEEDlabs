@@ -72,7 +72,45 @@ Crash the Server. In this task, we want to crash the server with the Shellshock 
 [10/20/21]seed@VM:.../cgi-bin$ curl -A '() { echo "hello";}; echo Content_type: text/plain; echo; /bin/sleep 20| /sbin/sleep 20|/usr/bin/sleep 20'  http://localhost/cgi-bin/myprog.cgi
 ```
 
-It attempts to run the sleep command in three different ways (since systems have slightly different configurations, sleep might be found in the directories /bin or /sbin or /usr/bin). Whichever sleep it runs, it causes the server to wait 20 seconds before replying . That will consume resources on the machine because a thread or process executing the sleep will do nothing else for 20 seconds.
+It attempts to run the sleep command in three different ways (since systems have slightly different configurations, sleep might be found in the directories /bin or /sbin or /usr/bin). Whichever sleep it runs, it causes the server to wait 20 seconds before replying . That will consume resources on the machine because a thread or process executing the sleep will do nothing else for 20 seconds. This is perhaps the simplest denial-of-service of all. The attackers simply tells the machine to sleep for a while. Send enough of those commands, and the machine could be tied up doing nothing and unable to service legitimate requests.
 
-This is perhaps the simplest denial-of-service of all. The attackers simply tells the machine to sleep for a while. Send enough of those commands, and the machine could be tied up doing nothing and unable to service legitimate requests.
+## 2.3 Task 2: Attack Set-UID programs
+In  this  task,  we  use  Shellshock  and  bash  function  to  attack  Set-UID  programs,  with  a  goal  to 
+gain  the  root  privilege.  Before  the  attack,  we  need  to  first  let  /bin/sh  to  point  to  /bin/bash  (by 
+default,  it  points  to  /bin/dash  in  our  SEED  Ubuntu  VM).  You  can  do  it  using  the  following 
+command:
+```sh
+$ sudo ln -sf /bin/bash /bin/sh
+```
+The following program is a Set-UID program, which simply runs the "/bin/ls -l" command. Please 
+compile  this  code,  make  it  a  Set-UID  program,  and  make  root  be  its  owner.  As  we  know,  the 
+system() function will invoke "/bin/sh -c" to run the given command, which means /bin/bash will 
+be invoked. 
+
+### Task  2A:  
+Can  you  use  the  Shellshock  vulnerability  to  gain  the  root  privilege?  Please  explain 
+why your attack can work (or not).
+#include <stdio.h>
+void main()
+{
+setuid(geteuid()); // make real uid = effective uid.
+system("/bin/ls -l");
+}
+It should be noted that using setuid(geteuid()) to turn the real uid into the effective uid is not a 
+common practice in Set-UID programs, but it does happen.
+### Task  2B:  
+Now,  remove  the  setuid(geteuid())  statement  from  the  above  program,  and  repeat 
+your  attack.  Can  you  gain  the  root  privilege?  Please  show  us  your  experiment  results.  Please 
+explain your lab results. (Hint: this problem can be considered similarly how the LD PRELOAD 
+environment variable vulnerability happens in Lab 1).
+### 2.4 Task 3: 
+Where is the Vulnerability Comes From?
+Task 3: The vulnerability is from the Bash source code: line-351 in variables.c. Please research 
+(google it) and figure out why the parse and execute() will cause a security vulnerability.
+### 2.5 Task 4: 
+Questions
+This is a writing task, please answer the following questions in your report:
+### Task 4: 
+According to secure software principles and rules, what is the fundamental problem of 
+the Shellshock vulnerability? What can we learn from this vulnerability?
 
