@@ -90,25 +90,22 @@ be invoked.
 ### Task  2A:  
 Can  you  use  the  Shellshock  vulnerability  to  gain  the  root  privilege?  Please  explain 
 why your attack can work (or not).
+```sh
 #include <stdio.h>
 void main()
 {
 setuid(geteuid()); // make real uid = effective uid.
 system("/bin/ls -l");
 }
+```
 It should be noted that using setuid(geteuid()) to turn the real uid into the effective uid is not a 
 common practice in Set-UID programs, but it does happen.
 ### Task  2B:  
-Now,  remove  the  setuid(geteuid())  statement  from  the  above  program,  and  repeat 
-your  attack.  Can  you  gain  the  root  privilege?  Please  show  us  your  experiment  results.  Please 
-explain your lab results. (Hint: this problem can be considered similarly how the LD PRELOAD 
-environment variable vulnerability happens in Lab 1).
-### 2.4 Task 3: 
-Where is the Vulnerability Comes From?
+Now,  remove  the  setuid(geteuid())  statement  from  the  above  program,  and  repeat your  attack.  Can  you  gain  the  root  privilege?  Please  show  us  your  experiment  results.  Please explain your lab results. (Hint: this problem can be considered similarly how the LD PRELOAD environment variable vulnerability happens in Lab 1).
+### 2.4 Task 3: Where is the Vulnerability Comes From?
 Task 3: The vulnerability is from the Bash source code: line-351 in variables.c. Please research 
 (google it) and figure out why the parse and execute() will cause a security vulnerability.
-### 2.5 Task 4: 
-Questions
+### 2.5 Task 4: Questions
 This is a writing task, please answer the following questions in your report:
 ### Task 4: 
 According to secure software principles and rules, what is the fundamental problem of 
