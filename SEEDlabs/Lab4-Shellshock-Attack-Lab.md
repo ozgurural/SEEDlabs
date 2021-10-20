@@ -67,3 +67,12 @@ The bash is not vulnerable in the seed setup. The vulnerable bash program on the
 
 ### Task 1B: 
 Crash the Server. In this task, we want to crash the server with the Shellshock attack. This kind of attack typically happens for a deny of service. In this task, the /bin/sleep function is your best friend to use in your attack. If you are not familiar with the sleep function, you can use sleep –help for more information. Please describe how your attack works.
+
+```sh
+[10/20/21]seed@VM:.../cgi-bin$ curl -A '() { echo "hello";}; echo Content_type: text/plain; echo; /bin/sleep 20| /sbin/sleep 20|/usr/bin/sleep 20'  http://localhost/cgi-bin/myprog.cgi
+```sh
+
+It attempts to run the sleep command in three different ways (since systems have slightly different configurations, sleep might be found in the directories /bin or /sbin or /usr/bin). Whichever sleep it runs, it causes the server to wait 20 seconds before replying . That will consume resources on the machine because a thread or process executing the sleep will do nothing else for 20 seconds.
+
+This is perhaps the simplest denial-of-service of all. The attackers simply tells the machine to sleep for a while. Send enough of those commands, and the machine could be tied up doing nothing and unable to service legitimate requests.
+
