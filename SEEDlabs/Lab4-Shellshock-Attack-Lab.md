@@ -9,9 +9,6 @@ The objective of this lab is to help students understand the Cross-Site Request 
 
 In  this  lab,  students  will  be  attacking  a  social  networking  web  application  using  the  CSRF attack. The open-source social networking application called Elgg has countermeasures against CSRF, but we have turned them off for the purpose of this lab.
 
-##  2 Lab Tasks
-
-## 2.1 Environment Setup
 ## 2 Lab Environment
 You need to use our provided virtual machine image for this lab.
 ##  2.1 Environment Configuration
