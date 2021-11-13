@@ -28,9 +28,9 @@ Charlie charlie seedcharlie
 Samy samy seedsamy
 Configuring DNS. We have configured the following URLs needed for this lab. To access the URLs, the Apache server needs to be started first:
 
-URL Description Directory
-http://www.csrflabattacker.com Attacker web site /var/www/CSRF/Attacker/
-http://www.csrflabelgg.com Elgg web site /var/www/CSRF/Elgg/
+URL                             Description         Directory
+http://www.csrflabattacker.com Attacker web site    /var/www/CSRF/Attacker/
+http://www.csrflabelgg.com     Elgg web site        /var/www/CSRF/Elgg/
 
 ## 3 Background of CSRF Attacks
 A CSRF attack involves three actors: a trusted site (Elgg), a victim user of the trusted site, and a malicious  site.  The  victim  user  simultaneously  visits  the  malicious  site  while  holding  an  active session with the trusted site. The attack involves the following sequence of steps:
