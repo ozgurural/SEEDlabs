@@ -76,6 +76,7 @@ to make the attack successful as soon as Alice visits the web page, without even
 page (hint: you can use the img tag, which automatically triggers an HTTP GET request).
 
 ![1](./lab6-screenshots/1.png)
+
 Figure 1 
 
 ![2](./lab6-screenshots/2.png)
