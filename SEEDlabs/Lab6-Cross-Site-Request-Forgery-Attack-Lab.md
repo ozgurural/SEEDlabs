@@ -75,6 +75,41 @@ request. In this task, you are not allowed to write JavaScript code to launch th
 to make the attack successful as soon as Alice visits the web page, without even making any click on the 
 page (hint: you can use the img tag, which automatically triggers an HTTP GET request).
 
+![1](./lab6-screenshots/1.png)
+Figure 1 
+
+![2](./lab6-screenshots/2.png)
+Figure 2 
+
+![3](./lab6-screenshots/3.png)
+Figure 3
+
+![4](./lab6-screenshots/4.png)
+Figure 4 
+
+![5](./lab6-screenshots/5.png)
+Figure 5 
+
+![6](./lab6-screenshots/6.png)
+Figure 6 
+
+![7](./lab6-screenshots/7.png)
+Figure 7 
+
+![8](./lab6-screenshots/8.png)
+Figure 8 
+
+![9](./lab6-screenshots/9.png)
+Figure 9 
+
+![10](./lab6-screenshots/10.png)
+Figure 10 
+
+![11](./lab6-screenshots/11.png)
+Figure 11 
+
+
+
 ##  4.2 Task: Turn on countermeasure
 To turn on the countermeasure, please go to the directory elgg/engine/lib and find the function 
 action gatekeeper in the actions.php file. In function action gatekeeper please comment out the 
