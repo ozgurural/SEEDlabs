@@ -12,35 +12,28 @@ In  this  lab,  students  will  be  attacking  a  social  networking  web  appli
 ## 2 Lab Environment
 You need to use our provided virtual machine image for this lab.
 ##  2.1 Environment Configuration
-In  this  lab,  we  need  three  things,  which  are  already  installed  in  the  provided  VM  image:  (1)  the  Firefox  web 
-browser,  (2)  the  Apache  web  server,  and  (3)  the  Elgg  web  application.  For  the  browser,  we  need  to  use  the 
-LiveHTTPHeaders extension for Firefox to inspect the HTTP requests and responses. The prebuilt Ubuntu VM 
-image provided to you has already installed the Firefox web browser with the required extensions.
-Starting  the  Apache  Server.  The  Apache  web  server  is  also  included  in  the  pre-built  Ubuntu 
-image. How-ever, the web server is not started by default. You need to first start the web server 
+In  this  lab,  we  need  three  things,  which  are  already  installed  in  the  provided  VM  image:  (1)  the  Firefox  web browser,  (2)  the  Apache  web  server,  and  (3)  the  Elgg  web  application.  For  the  browser,  we  need  to  use  the LiveHTTPHeaders extension for Firefox to inspect the HTTP requests and responses. The prebuilt Ubuntu VM image provided to you has already installed the Firefox web browser with the required extensions. Starting the Apache  Server. The  Apache web server is also included in the  prebuilt Ubuntu image. However, the web server is not started by default. You need to first start the web server 
 using the following command:
+
 ```sh
 % sudo service apache2 start
 ```
-The Elgg Web Application. We use an open-source web application called Elgg in this lab. Elgg is a 
-web-based social-networking application. It is already set up in the pre-built Ubuntu VM image. We 
-have also created several user accounts on the Elgg server and the credentials are given below
+
+The Elgg Web Application. We use an open-source web application called Elgg in this lab. Elgg is a web-based social-networking application. It is already set up in the pre-built Ubuntu VM image. We have also created several user accounts on the Elgg server and the credentials are given below
 User UserName Password
 Admin admin seedelgg
 Alice alice seedalice
 Boby boby seedboby
 Charlie charlie seedcharlie
 Samy samy seedsamy
-Configuring DNS. We have configured the following URLs needed for this lab. To access the URLs , the
-Apache server needs to be started first:
-CS532 Labs 2
+Configuring DNS. We have configured the following URLs needed for this lab. To access the URLs, the Apache server needs to be started first:
+
 URL Description Directory
 http://www.csrflabattacker.com Attacker web site /var/www/CSRF/Attacker/
 http://www.csrflabelgg.com Elgg web site /var/www/CSRF/Elgg/
+
 ## 3 Background of CSRF Attacks
-A CSRF attack involves three actors: a trusted site (Elgg), a victim user of the trusted site, and a 
-malicious  site.  The  victim  user  simultaneously  visits  the  malicious  site  while  holding  an  active 
-session with the trusted site. The attack involves the following sequence of steps:
+A CSRF attack involves three actors: a trusted site (Elgg), a victim user of the trusted site, and a malicious  site.  The  victim  user  simultaneously  visits  the  malicious  site  while  holding  an  active session with the trusted site. The attack involves the following sequence of steps:
 1. The victim user logs into the trusted site using his/her username and password, and thus 
 creates a new session.
 2. The trusted site stores the session identifier for the session in a cookie in the victim user’s web browser.
