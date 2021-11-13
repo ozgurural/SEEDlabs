@@ -151,6 +151,8 @@ function action_gatekeeper($action) {
 ........
 }
 ```
-After turning on the countermeasure above, try the CSRF attack again, and describe your 
-observation.  Please  point  out  the  secret  tokens  in  the  HTTP  request  captured  using  LiveHTTPHeaders. 
-Please explain why the attacker cannot send these secret tokens in the CSRF attack?
+After turning on the countermeasure above, try the CSRF attack again, and describe your observation.  Please  point  out  the  secret  tokens  in  the  HTTP  request  captured  using  LiveHTTPHeaders. Please explain why the attacker cannot send these secret tokens in the CSRF attack?
+
+After turning on the countermeasure above, we login again to Alice's account and click the malicious url again. This time she sees a warning about the attack. Since Alice had a different timestamp(elgg_ts) and different unique secret token(elgg_token), the attack could not succeed. Whenever there is a request, it checks if the two secret values are valid for the current active session. 
+
+
