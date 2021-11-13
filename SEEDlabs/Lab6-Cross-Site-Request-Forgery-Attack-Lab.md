@@ -79,36 +79,64 @@ page (hint: you can use the img tag, which automatically triggers an HTTP GET re
 
 Figure 1 
 
+First of all, we need to know Boby's user id. We inspected the element on Boby to find the id. As you can see, it is 43.
+
 ![2](./lab6-screenshots/2.png)
+
 Figure 2 
 
+We then login with Boby's account and see that Boby has no friends in his friends list. 
+
 ![3](./lab6-screenshots/3.png)
+
 Figure 3
 
+Then, we search Alice as you can see Figure 3. 
+
 ![4](./lab6-screenshots/4.png)
+
 Figure 4 
 
+After that, we add the Alice and simultaneously check the "HTTP Header Live" extension to find the GET request for XMLHTTPRequest.
+
 ![5](./lab6-screenshots/5.png)
+
 Figure 5 
 
+Then, we copt the URL fronm the GET request and the URL has elgg_ts and elgg_token in it which we use to append in our URL string wike creating a malicious site. Instead of Alice's user id, we give Boby's user id(43).
+
 ![6](./lab6-screenshots/6.png)
+
 Figure 6 
 
+As you can see in Figure 6, we created an index.html file under the /var/www/CSRF/Attacker folder. 
+
 ![7](./lab6-screenshots/7.png)
+
 Figure 7 
 
+After that we restart the Apache service. 
+
 ![8](./lab6-screenshots/8.png)
+
 Figure 8 
 
+After creating the malicious site, we login as Boby and create a blog post for phising attack. The blog post contains a malicious URL and we think Alice will click it. 
+
 ![9](./lab6-screenshots/9.png)
+
 Figure 9 
 
 ![10](./lab6-screenshots/10.png)
+
 Figure 10 
+
+After that, we login the website as ALice and see the blog post created by Boby.
 
 ![11](./lab6-screenshots/11.png)
 Figure 11 
 
+Lastly, we click in the Boby's blog post. As you can see in Figure 11, Alice added Bob as a friend unconsciously with that malicious link. In this example attack, a malicious URL injected through trusted website using GET request.
 
 
 ##  4.2 Task: Turn on countermeasure
