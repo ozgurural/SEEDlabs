@@ -29,6 +29,20 @@ $ bash: /zzz: (*@Permission denied@*)
 
 From the above experiment, we can see that if we try to write to this file as a normal user, we will fail, because the file is only readable to normal users. However, because of the Dirty COW vulnerability in the system, we can find a way to write to this file. Our objective is to replace the pattern "222222" with "******".
 
+
+I followed the steps above as you can see below. 
+```sh
+[11/27/21]seed@VM:~$ setxkbmap tr
+[11/27/21]seed@VM:~$ sudo touch /zzz
+[11/27/21]seed@VM:~$ sudo chmod 644 /zzz
+[11/27/21]seed@VM:~$ sudo gedit /zzz
+[11/27/21]seed@VM:~$ ls -l /zzz
+-rw-r--r-- 1 root root 19 Nov 27 18:49 /zzz
+[11/27/21]seed@VM:~$ echo 99999 > /zzz
+bash: /zzz: Permission denied
+```
+
+
 ## 2.2 Set Up the Memory Mapping Thread
 
 You  check  the  program  cow  attack.c  for  this  lab.  The  program  has  three  threads:  the  main 
