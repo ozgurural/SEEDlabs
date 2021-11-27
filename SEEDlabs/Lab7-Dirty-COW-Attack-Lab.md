@@ -1,16 +1,16 @@
 
-# SEEDlabs: Cross-Site Request Forgery (CSRF) Attack Lab
+# SEEDlabs: Dirty COW Attack Lab
 
 #### Ozgur Ural
 #### Student ID: 2564455
 
-## 1 Lab Description
+## 1 Lab Overview
 
-The objective of this lab is to help students understand the Cross-Site Request Forgery (CSRF)  attack.  A  CSRF  attack  involves  a  victim  user,  a  trusted  site,  and  a  malicious  site.  The  victim user holds an active session with a trusted site while visiting a malicious site. The malicious site injects an HTTP request for the trusted site into the victim user session, causing damages.
+The Dirty COW vulnerability is an interesting case of the race condition vulnerability. It existed in the  Linux  kernel  since  September  2007,  and  was  discovered  and  exploited  in  October  2016. The vulnerability affects all Linux-based operating systems, including Android, and its consequence is very severe: attackers can gain the root privilege by exploiting the vulnerability. The  vulnerability  resides  in  the  code  of  copy-on-write  inside  Linux  kernel.  By  exploiting  this vulnerability, attackers can modify any protected file, even though these files are only readable to them.
 
-In  this  lab,  students  will  be  attacking  a  social  networking  web  application  using  the  CSRF attack. The open-source social networking application called Elgg has countermeasures against CSRF, but we have turned them off for the purpose of this lab.
+The objective of this lab is for you to gain the hands-on experience on the Dirty COW attack, understand the race condition vulnerability exploited by the attack, and gain a deeper understanding  of  the  general race condition security  problems.  In  this  lab, you will  exploit the Dirty COW race condition vulnerability to gain the root privilege. Note:  This  lab  is  based  on  the  Ubuntu12.04  VM.  If  you  are  currently  using  a  newer  Linux version,  such  as  Ubuntu16.04,  the  vulnerability  has  already  been  patched.  Therefore, to complete this lab please use the Ubuntu 12.04 VM.
 
-## 2 Lab Environment
+## 2 Task 1: Modify a Dummy Read-Only File
 You need to use our provided virtual machine image for this lab.
 ##  2.1 Environment Configuration
 In  this  lab,  we  need  three  things,  which  are  already  installed  in  the  provided  VM  image:  (1)  the  Firefox  web browser,  (2)  the  Apache  web  server,  and  (3)  the  Elgg  web  application.  For  the  browser,  we  need  to  use  the LiveHTTPHeaders extension for Firefox to inspect the HTTP requests and responses. The prebuilt Ubuntu VM image provided to you has already installed the Firefox web browser with the required extensions. Starting the Apache  Server. The  Apache web server is also included in the  prebuilt Ubuntu image. However, the web server is not started by default. You need to first start the web server 
