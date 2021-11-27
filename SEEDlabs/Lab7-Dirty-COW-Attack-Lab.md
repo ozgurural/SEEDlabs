@@ -11,35 +11,23 @@ The Dirty COW vulnerability is an interesting case of the race condition vulnera
 The objective of this lab is for you to gain the hands-on experience on the Dirty COW attack, understand the race condition vulnerability exploited by the attack, and gain a deeper understanding  of  the  general race condition security  problems.  In  this  lab, you will  exploit the Dirty COW race condition vulnerability to gain the root privilege. Note:  This  lab  is  based  on  the  Ubuntu12.04  VM.  If  you  are  currently  using  a  newer  Linux version,  such  as  Ubuntu16.04,  the  vulnerability  has  already  been  patched.  Therefore, to complete this lab please use the Ubuntu 12.04 VM.
 
 ## 2 Task 1: Modify a Dummy Read-Only File
-You need to use our provided virtual machine image for this lab.
-##  2.1 Environment Configuration
-In  this  lab,  we  need  three  things,  which  are  already  installed  in  the  provided  VM  image:  (1)  the  Firefox  web browser,  (2)  the  Apache  web  server,  and  (3)  the  Elgg  web  application.  For  the  browser,  we  need  to  use  the LiveHTTPHeaders extension for Firefox to inspect the HTTP requests and responses. The prebuilt Ubuntu VM image provided to you has already installed the Firefox web browser with the required extensions. Starting the Apache  Server. The  Apache web server is also included in the  prebuilt Ubuntu image. However, the web server is not started by default. You need to first start the web server 
-using the following command:
+The objective of this task is to write to a read-only file using the Dirty COW vulnerability.
+
+## 2.1 Create a Dummy File
+We first need to select a target file. Although this file can be any read-only file in the system, we will use a dummy file in this task, so we do not corrupt an important system file in case we make a mistake. Please create a file called zzz in the root directory using the root account, change its permission  to  read-only for normal users, and put some random content into the file using an editor such as gedit.
 
 ```sh
-% sudo service apache2 start
+$ sudo touch /zzz
+$ sudo chmod 644 /zzz
+$ sudo gedit /zzz
+$ cat /zzz 111111222222333333
+$ ls -l /zzz
+$ -rw-r--r-- 1 root root 19 Oct 18 22:03 /zzz
+$ echo 99999 > /zzz
+$ bash: /zzz: (*@Permission denied@*)
 ```
 
-The Elgg Web Application. We use an open-source web application called Elgg in this lab. Elgg is a web-based social-networking application. It is already set up in the pre-built Ubuntu VM image. We have also created several user accounts on the Elgg server and the credentials are given below
-User UserName Password
-Admin admin seedelgg
-Alice alice seedalice
-Boby boby seedboby
-Charlie charlie seedcharlie
-Samy samy seedsamy
-Configuring DNS. We have configured the following URLs needed for this lab. To access the URLs, the Apache server needs to be started first:
-
-URL                            
-http://www.csrflabattacker.com
-http://www.csrflabelgg.com 
-
-Description         
-Attacker web site 
-Elgg web site 
-
-Directory
-/var/www/CSRF/Attacker/
-/var/www/CSRF/Elgg/
+From the above experiment, we can see that if we try to write to this file as a normal user, we will fail, because the file is only readable to normal users. However, because of the Dirty COW vulnerability in the system, we can find a way to write to this file. Our objective is to replace the pattern "222222" with "******".
 
 ## 3 Background of CSRF Attacks
 A CSRF attack involves three actors: a trusted site (Elgg), a victim user of the trusted site, and a malicious  site.  The  victim  user  simultaneously  visits  the  malicious  site  while  holding  an  active session with the trusted site. The attack involves the following sequence of steps:
