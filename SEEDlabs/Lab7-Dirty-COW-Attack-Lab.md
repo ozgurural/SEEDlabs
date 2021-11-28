@@ -83,6 +83,15 @@ int main(int argc, char *argv[])
 ```
 In the above code, we start two threads: madviseThread (Line À) and writeThread (Line `)
 
+```sh
+[11/27/21]seed@VM:~$ sudo gedit cow_attack.c
+[11/27/21]seed@VM:~$ gcc attack.c -lpthread
+[11/27/21]seed@VM:~$ a.out
+[11/27/21]seed@VM:~$ cat /zzz
+
+
+```
+
 ## 2.3 Set Up the write Thread
 
 The job of the write thread listed in the following is to replace the string "222222" in the memory 
