@@ -83,15 +83,7 @@ int main(int argc, char *argv[])
 ```
 In the above code, we start two threads: madviseThread (Line À) and writeThread (Line `)
 
-The attack is successful as you can see below.
 
-```sh
-[11/27/21]seed@VM:~$ sudo gedit cow_attack.c
-[11/27/21]seed@VM:~$ gcc attack.c -lpthread
-[11/27/21]seed@VM:~$ a.out
-[11/27/21]seed@VM:~$ cat /zzz
-111111******333333
-```
 
 ## 2.3 Set Up the write Thread
 
@@ -145,6 +137,16 @@ able to achieve that.
 $ gcc cow_attack.c -lpthread
 $ a.out
 ... press Ctrl-C after a few seconds ...
+```
+
+The attack is successful as you can see below.
+
+```sh
+[11/27/21]seed@VM:~$ sudo gedit cow_attack.c
+[11/27/21]seed@VM:~$ gcc attack.c -lpthread
+[11/27/21]seed@VM:~$ a.out
+[11/27/21]seed@VM:~$ cat /zzz
+111111******333333
 ```
 
 ## 3 Task 2: Modify the Password File to Gain the Root Privilege
